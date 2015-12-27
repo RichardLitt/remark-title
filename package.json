@@ -1,0 +1,46 @@
+{
+  "name": "remark-title",
+  "version": "1.0.0",
+  "description": "remark plugin to inject a title into a file",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "node test | tap-spec"
+  },
+  "author": {
+    "name": "Richard Littauer",
+    "email": "richard.littauer@gmail.com",
+    "url": "http://burntfen.com"
+  },
+  "dependencies": {
+    "lodash": "^3.10.1",
+    "mdast": "^2.1.0",
+  },
+  "devDependencies": {
+    "diff": "^1.4.0",
+    "tap-spec": "^4.0.0",
+    "tape": "^4.0.0",
+    "fs": "0.0.2",
+    "graceful-fs": "^4.1.2",
+    "mdast-lint": "^1.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/RichardLitt/remark-title.git"
+  },
+  "keywords": [
+    "remark",
+    "mdast",
+    "generation",
+    "inject",
+    "automatic",
+    "title",
+    "header",
+    "text",
+    "markdown"
+  ],
+  "homepage": "https://github.com/RichardLitt/remark-title",
+  "bugs": {
+    "url": "https://github.com/RichardLitt/remark-title/issues"
+  }
+}
