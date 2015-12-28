@@ -1,4 +1,4 @@
-const mdast = require('mdast')
+const remark = require('remark')
 const test = require('tape')
 const diff = require('diff')
 const plugin = require('./')
@@ -18,7 +18,7 @@ const expected = {
 
 test('remark-title', function (t) {
   Object.keys(fixtures).forEach(function (name) {
-    var processor = mdast.use(plugin)
+    var processor = remark.use(plugin)
 
     const actual = processor.process(fs.readFileSync(fixtures[name], 'utf8')).trim()
     const expect = fs.readFileSync(expected[name], 'utf8').trim()
@@ -34,7 +34,7 @@ test('remark-title', function (t) {
 })
 
 test('remark-title with option', function (t) {
-  var processor = mdast.use(plugin, {
+  var processor = remark.use(plugin, {
     title: 'remark-replace'
   })
 
