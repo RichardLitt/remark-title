@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "lodash": "^3.10.1",
-    "mdast": "^2.1.0",
+    "mdast": "^2.1.0"
   },
   "devDependencies": {
     "diff": "^1.4.0",
