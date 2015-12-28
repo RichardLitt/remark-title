@@ -1,6 +1,6 @@
 {
   "name": "remark-title",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "remark plugin to inject a title into a file",
   "main": "index.js",
   "license": "MIT",
