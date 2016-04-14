@@ -25,7 +25,7 @@ readme = remark.use(title, {
 
 This will add a title to your document if one is not already present.
 The title will be the name of the folder ([`VFile#directory`](https://github.com/wooorm/vfile#vfiledirectory),
-when available, or `__dirname`), unless specified as an option.
+when available, or `process.cwd()`), unless specified as an option.
 If an existing title is different (case-insensitive), it will replace it.
 
 For example, the following input markdown:

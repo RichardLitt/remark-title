@@ -7,9 +7,12 @@ module.exports = checkTitle
 function checkTitle (remark, opts) {
   return function checkTitleTransformer (root, file) {
     var children = root.children
-    var fileDir = last(file.directory.split(sep));
-    var baseDir = last(__dirname.split(sep));
-    var headingText = (opts && opts.title) ? opts.title : fileDir || baseDir
+    var headingText = last(process.cwd().split(sep))
+    if (file.directory) {
+      headingText = last(file.directory.split(sep))
+    } else if (opts && opts.title) {
+      headingText = opts.title
+    }
     var node = children[0]
     var title = {
       type: 'heading',
