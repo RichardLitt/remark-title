@@ -1,6 +1,6 @@
 {
   "name": "remark-title",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "remark plugin to inject a title into a file",
   "main": "index.js",
   "license": "MIT",
@@ -46,7 +46,7 @@
     "url": "https://github.com/RichardLitt/remark-title/issues"
   },
   "coordinates": [
-    42.3811792,
-    -71.09658209999999
+    42.3377967,
+    -71.0705763
   ]
 }
