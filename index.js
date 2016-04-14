@@ -8,7 +8,7 @@ function checkTitle (remark, opts) {
   return function checkTitleTransformer (root, file) {
     var children = root.children
     var headingText = last(process.cwd().split(sep))
-    if (file.directory) {
+    if (file.directory && file.directory !== '.') {
       headingText = last(file.directory.split(sep))
     } else if (opts && opts.title) {
       headingText = opts.title
