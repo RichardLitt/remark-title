@@ -18,9 +18,9 @@ const expected = {
 
 test('remark-title', function (t) {
   Object.keys(fixtures).forEach(function (name) {
-    var processor = remark.use(plugin)
+    var processor = remark().use(plugin)
 
-    const actual = processor.process(fs.readFileSync(fixtures[name], 'utf8')).trim()
+    const actual = processor.processSync(fs.readFileSync(fixtures[name], 'utf8')).toString().trim()
     const expect = fs.readFileSync(expected[name], 'utf8').trim()
 
     t.equal(actual, expect, name)
@@ -34,11 +34,11 @@ test('remark-title', function (t) {
 })
 
 test('remark-title with option', function (t) {
-  var processor = remark.use(plugin, {
+  var processor = remark().use(plugin, {
     title: 'remark-replace'
   })
 
-  const actual = processor.process(fs.readFileSync('fixtures/basic-option.md', 'utf8')).trim()
+  const actual = processor.processSync(fs.readFileSync('fixtures/basic-option.md', 'utf8')).toString().trim()
   const expect = fs.readFileSync('fixtures/replace-title.md', 'utf8').trim()
 
   t.equal(actual, expect, 'Replaces the title with the specified option')

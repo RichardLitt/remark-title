@@ -18,13 +18,13 @@ Used as a plugin for remark like so:
 const title = require('remark-title')
 const remark  = require('remark')
 
-readme = remark.use(title, {
-  'title': 'remark-title'
-}).process(readme)
+readme = remark()
+  .use(title, {title: 'remark-title'})
+  .processSync(readme)
 ```
 
 This will add a title to your document if one is not already present.
-The title will be the name of the folder ([`VFile#directory`](https://github.com/wooorm/vfile#vfiledirectory),
+The title will be the name of the folder ([`VFile#dirname`](https://github.com/vfile/vfile#vfiledirname),
 when available, or `process.cwd()`), unless specified as an option.
 If an existing title is different (case-insensitive), it will replace it.
 
@@ -50,4 +50,4 @@ Optional. A string for a specified title.
 
 ## License
 
-MIT. See [LICENSE.md](http://github.com/hughsk/remark-title/blob/master/LICENSE.md) for details.
+MIT. See [LICENSE.md](http://github.com/RichardLitt/remark-title/blob/master/LICENSE.md) for details.

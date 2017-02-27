@@ -1,24 +1,21 @@
 var sep = require('path').sep
-var last = require('lodash').last
 var toString = require('mdast-util-to-string')
 
 module.exports = checkTitle
 
-function checkTitle (remark, opts) {
+function checkTitle (opts) {
+  var title = (opts || {}).title
   return function checkTitleTransformer (root, file) {
+    var filePath = (file.dirname === '.' ? file.cwd : file.dirname) || title || process.cwd();
+    var dirnames = filePath.split(sep)
+    var folder = dirnames[dirnames.length - 1].toLowerCase()
     var children = root.children
-    var headingText = last(process.cwd().split(sep))
-    if (file.directory && file.directory !== '.') {
-      headingText = last(file.directory.split(sep))
-    } else if (opts && opts.title) {
-      headingText = opts.title
-    }
     var node = children[0]
-    var title = {
+    var replacement = {
       type: 'heading',
       depth: 1,
       children: [
-        { type: 'text', value: headingText }
+        { type: 'text', value: folder }
       ]
     }
 
@@ -30,12 +27,12 @@ function checkTitle (remark, opts) {
         .replace(/\s+/g, ' ')
         .trim()
 
-      if (text !== headingText) {
-        children[0] = title
+      if (text !== folder) {
+        children[0] = replacement
       }
     // If it doesn't, splice it in
     } else {
-      children = children.splice(0, 0, title)
+      children.unshift(replacement)
     }
 
     return
