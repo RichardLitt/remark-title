@@ -6,9 +6,9 @@ module.exports = checkTitle
 function checkTitle (opts) {
   var title = (opts || {}).title
   return function checkTitleTransformer (root, file) {
-    var filePath = (file.dirname === '.' ? file.cwd : file.dirname) || title || process.cwd();
+    var filePath = title || (file.dirname === '.' ? file.cwd : file.dirname) || process.cwd();
     var dirnames = filePath.split(sep)
-    var folder = dirnames[dirnames.length - 1].toLowerCase()
+    var folder = dirnames[dirnames.length - 1]
     var children = root.children
     var node = children[0]
     var replacement = {

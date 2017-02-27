@@ -1,51 +1,55 @@
 const remark = require('remark')
 const test = require('tape')
 const diff = require('diff')
+const vfile = require('to-vfile')
 const plugin = require('./')
 const fs = require('fs')
 
-const fixtures = {
-  'Does nothing if header is correct': 'fixtures/basic.md',
-  'Replaces header if it is incorrect': 'fixtures/replace-title.md',
-  'Adds a header if it is not present': 'fixtures/add-title.md'
-}
-
-const expected = {
-  'Does nothing if header is correct': 'fixtures/basic-expected.md',
-  'Replaces header if it is incorrect': 'fixtures/replace-title-expected.md',
-  'Adds a header if it is not present': 'fixtures/add-title-expected.md'
-}
+const fixtures = [
+  {
+    name: 'Does nothing if header is correct',
+    actual: 'fixtures/basic.md',
+    expected: 'fixtures/basic-expected.md'
+  },
+  {
+    name: 'Should use cwd without `dirname`',
+    actual: 'fixtures/cwd.md',
+    expected: 'fixtures/cwd-expected.md',
+    raw: true
+  },
+  {
+    name: 'Replaces header if it is incorrect',
+    actual: 'fixtures/replace-title.md',
+    expected: 'fixtures/replace-title-expected.md'
+  },
+  {
+    name: 'Adds a header if it is not present',
+    actual: 'fixtures/add-title.md',
+    expected: 'fixtures/add-title-expected.md'
+  },
+  {
+    name: 'Replaces the title with the specified option',
+    actual: 'fixtures/basic-option.md',
+    expected: 'fixtures/basic-option-expected.md',
+    options: {title: 'Replace!'}
+  }
+]
 
 test('remark-title', function (t) {
-  Object.keys(fixtures).forEach(function (name) {
-    var processor = remark().use(plugin)
+  fixtures.forEach(function (fixture) {
+    var expect = vfile.readSync(fixture.expected).toString()
+    var input = vfile.readSync(fixture.actual)
+    var actual = remark()
+      .use(plugin, fixture.options)
+      .processSync(fixture.raw ? String(input) : input)
+      .toString()
 
-    const actual = processor.processSync(fs.readFileSync(fixtures[name], 'utf8')).toString().trim()
-    const expect = fs.readFileSync(expected[name], 'utf8').trim()
-
-    t.equal(actual, expect, name)
+    t.equal(actual, expect, fixture.name)
 
     if (actual !== expect) {
       console.error(diff.diffChars(expect, actual))
     }
-  })
-
-  t.end()
-})
-
-test('remark-title with option', function (t) {
-  var processor = remark().use(plugin, {
-    title: 'remark-replace'
-  })
-
-  const actual = processor.processSync(fs.readFileSync('fixtures/basic-option.md', 'utf8')).toString().trim()
-  const expect = fs.readFileSync('fixtures/replace-title.md', 'utf8').trim()
-
-  t.equal(actual, expect, 'Replaces the title with the specified option')
-
-  if (actual !== expect) {
-    console.error(diff.diffChars(expect, actual))
-  }
+  });
 
   t.end()
 })
