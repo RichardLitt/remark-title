@@ -1,5 +1,7 @@
 # remark-title
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/RichardLitt/remark-title.svg)](https://greenkeeper.io/)
+
 ![](http://img.shields.io/badge/stability-stable-orange.svg?style=flat)
 ![](http://img.shields.io/npm/v/remark-title.svg?style=flat)
 ![](http://img.shields.io/npm/dm/remark-title.svg?style=flat)
