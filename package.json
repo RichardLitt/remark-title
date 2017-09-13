@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "diff": "^3.2.0",
-    "remark": "^7.0.0",
+    "remark": "^8.0.0",
     "tap-spec": "^4.1.1",
     "tape": "^4.5.1",
     "to-vfile": "^2.1.1"
